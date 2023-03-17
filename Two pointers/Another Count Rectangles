@@ -1,0 +1,33 @@
+Problem Description
+ Given a sorted array of distinct integers A and an integer B, find and return how many rectangles with distinct configurations can be created using elements of this array as length and breadth whose area is lesser than B. 
+ (Note that a rectangle of 2 x 3 is different from 3 x 2 if we take configuration into view)
+ 
+ Input Format: 
+ The first argument given is the integer array A. The second argument given is integer B.
+ 
+ Output Format:
+ Return the number of rectangles with distinct configurations with area less than B modulo (109 + 7).
+ 
+ --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ 
+ Solution:
+ 
+ public class Solution {
+    public int solve(int[] A, int B) {
+        int n = A.length;
+        int p1 =0, p2 = n-1;
+        //since we are considering p1 * p2 and p2 * p1 as different configuration for area of rectangle
+        //we have traverse the 2 pointers through whole array, in which area must be less than B
+        long ans = 0, mod = 1000000007;
+        while(p1<=n-1 && p2>=0){
+            if((long) A[p1] * A[p2] < B){
+                ans = (ans + p2 + 1 ) % mod;
+                //why 1 ->> bcoz array is zero based index, we have to consider all pairs from right side
+                // why ans + p2 --> p1*p2 < B then all pairs less than p2 (p2 * p1) will be less than B
+                p1++;
+            }
+            else p2--;
+        }
+        return (int)ans;
+    }
+}
