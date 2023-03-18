@@ -1,0 +1,40 @@
+Given an one-dimensional integer array A of size N and an integer B. Count all distinct pairs with difference equal to B. Here a pair is defined as an integer pair (x, y), where x and y are both numbers in the array and their absolute difference is B.
+
+Problem Constraints
+  1 <= N <= 104
+  0 <= A[i], B <= 105
+  
+Input Format
+First argument is an one-dimensional integer array A of size N. Second argument is an integer B.
+
+Output Format
+Return an integer denoting the count of all distinct pairs with difference equal to B.
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Solution
+
+public class Solution {
+    public int solve(int[] nums, int k) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for(int num: nums){
+            if(map.containsKey(num))  map.put(num, map.get(num)+1);
+            else map.put(num, 1);
+        }
+
+        //if k ==0 then frequency of value must be 2 or greater than 2, 4, 6 then only we will get diff as 0
+        //if k != 0 then we have to add each element with k and find the sum value present in array or not
+            int count =0;
+        for(int i : map.keySet()){
+            if(k==0){
+                if(map.get(i)>1) count++;
+            }
+            else {
+                int search = k + i;
+                if(map.containsKey(search)) count++;
+            }
+        }
+        return count;
+        
+    }
+}
