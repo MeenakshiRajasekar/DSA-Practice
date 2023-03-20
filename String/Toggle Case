@@ -1,0 +1,32 @@
+You are given a character string A having length N, consisting of only lowercase and uppercase latin letters. You have to toggle case of each character of string A. For e.g 'A' is changed to 'a', 'e' is changed to 'E', etc.
+
+Problem Constraints:
+1 <= N <= 105
+A[i] ∈ ['a'-'z', 'A'-'Z']
+
+Input Format
+First and only argument is a character string A.
+
+Output Format
+Return a character string
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Solution:
+public class Solution {
+    public String solve(String str) {
+        StringBuffer toggledA = new StringBuffer();
+        for(int i=0;i<str.length();i++){
+            char c = str.charAt(i);
+            if(Character.isLowerCase(c)){
+                toggledA.append(Character.toUpperCase(c));
+            }
+            else if(Character.isUpperCase(c)){
+                toggledA.append(Character.toLowerCase(c));
+            }
+            else toggledA.append(c);
+        }
+        String result = toggledA.toString();
+        return result;
+    }
+}
